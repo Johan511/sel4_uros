@@ -1,0 +1,5 @@
+#!/bin/sh
+# Mount virtual filesystems - must happen before any other init scripts
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t devtmpfs none /dev

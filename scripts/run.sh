@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+BUILD_DIR="${BUILD_DIR:-$PROJECT_DIR/build}"
+EXAMPLE="${1:-ping_pong}"
+LOADER_IMG="$BUILD_DIR/src/examples/$EXAMPLE/loader.img"
+
+if [ ! -f "$LOADER_IMG" ]; then
+    echo "ERROR: $LOADER_IMG not found"
+    echo "Run ./build.sh first"
+    exit 1
+fi
+
+DEBUG_FLAGS=""
+if [[ " $* " == *" --debug "* ]]; then
+    DEBUG_FLAGS="-s -S"
+fi
+
+echo "Loader image: $LOADER_IMG"
+echo "Starting QEMU with virtio-net (VM can access network)"
+qemu-system-aarch64 \
+    -machine virt,virtualization=on \
+    -cpu cortex-a53 -smp 3 \
+    -nographic \
+    -serial mon:stdio \
+    -device loader,file="$LOADER_IMG",addr=0x70000000,cpu-num=0 \
+    -m size=2G \
+    -netdev user,id=mynet0 \
+    -device virtio-net-device,netdev=mynet0,mac=52:55:00:d1:55:01 $DEBUG_FLAGS

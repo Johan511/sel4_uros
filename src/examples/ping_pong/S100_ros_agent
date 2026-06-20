@@ -1,0 +1,17 @@
+#!/bin/sh
+mkdir -p /run/network
+
+if [ ! -e /dev/mem ]; then
+    mknod /dev/mem c 1 1
+fi
+
+for i in 1 2 3 4 5 6 7 8 9 10; do
+    [ -e /sys/class/net/eth0 ] && { echo "eth0 found after ${i}s"; break; }
+    sleep 1
+done
+[ ! -e /sys/class/net/eth0 ] && { echo "ERROR: eth0!"; exit 1; }
+
+ifconfig eth0 10.0.2.15 netmask 255.255.255.0 up
+arp -s 10.0.2.100 02:00:00:00:00:02
+/bin/MicroXRCEAgent udp4 -p 8888 &
+/bin/is_port_open 8888 0xC200000 &
