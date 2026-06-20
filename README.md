@@ -6,6 +6,17 @@ A [blog post](https://johan511.github.io/posts/2025-01-19-uros-on-sel4/) provide
 
 ## Build instructions
 
+### 0. Clone instructions
+
+Pull the ROS 2 Humble Docker image and clone the repository inside it:
+
+```bash
+docker pull ros:humble
+docker run -it --name uros_sel4 ros:humble bash -c "git clone https://github.com/johan511/uros_sel4.git uros_sel4 && cd uros_sel4 && bash"
+
+docker start -ai uros_sel4 # to re-attach container
+```
+
 ### 1. One-time setup
 
 ```bash
