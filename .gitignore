@@ -1,4 +1,4 @@
 third_party/
-build/
+build*/
 vm_images/
 .kilo/
