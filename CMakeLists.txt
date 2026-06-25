@@ -6,7 +6,7 @@ endif()
 
 project(uros_sel4 LANGUAGES C CXX ASM)
 
-set(MICROKIT_SDK "${CMAKE_SOURCE_DIR}/third_party/microkit-sdk-2.2.0" CACHE PATH "microkit SDK")
+set(MICROKIT_SDK "${CMAKE_SOURCE_DIR}/third_party/microkit-sdk-1.4.1" CACHE PATH "microkit SDK")
 set(MICROKIT_BOARD "qemu_virt_aarch64" CACHE STRING "microkit board")
 set(MICROKIT_CONFIG "debug" CACHE STRING "microkit config")
 set(BOARD_DIR "${MICROKIT_SDK}/board/${MICROKIT_BOARD}/${MICROKIT_CONFIG}")

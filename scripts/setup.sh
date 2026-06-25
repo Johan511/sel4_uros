@@ -12,7 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 THIRD_PARTY_DIR="$PROJECT_DIR/third_party"
 mkdir -p "$THIRD_PARTY_DIR"
-MICROKIT_VERSION="${MICROKIT_VERSION:-2.2.0}"
+MICROKIT_VERSION="${MICROKIT_VERSION:-1.4.1}"
 
 echo "=== Installing system packages ==="
 apt-get update

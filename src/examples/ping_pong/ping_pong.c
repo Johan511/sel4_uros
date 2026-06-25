@@ -44,7 +44,7 @@ size_t custom_transport_seL4_read(uxrCustomTransport *, uint8_t *buf, size_t len
 void send_impl(std_msgs__msg__Header *hdr, rcl_publisher_t *publisher);
 void send_ping() { 
     static uint64_t numPingsSent = 0;
-    if(numPingsSent++ > MAX_PINGS_SENT)
+    if(++numPingsSent > MAX_PINGS_SENT)
         return;
     send_impl(&outgoingPing, &pingPublisher);
     microkit_dbg_puts("sent_ping\n"); 
