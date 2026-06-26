@@ -7,8 +7,8 @@
     <memory_region name="gic_vcpu" size="0x1_000" phys_addr="0x8_040_000" />
     <memory_region name="uart" size="0x1_000" phys_addr="0x9_000_000" />
 
-    <protection_domain name="ping_pong" priority="100" stack_size="0x40000">
-        <program_image path="ping_pong_component.elf" />
+    <protection_domain name="uros_app" priority="100" stack_size="0x40000">
+        <program_image path="uros_app.elf" />
         <map mr="pd2vmm" vaddr="0x5_000_000" perms="rw" cached="false" setvar_vaddr="pd2vmm" />
         <map mr="vmm2pd" vaddr="0x5_100_000" perms="rw" cached="false" setvar_vaddr="vmm2pd" />
     </protection_domain>
@@ -29,10 +29,10 @@
 
     <channel>
         <end pd="vmm" id="1" />
-        <end pd="ping_pong" id="1" />
+        <end pd="uros_app" id="1" />
     </channel>
     <channel>
         <end pd="vmm" id="2" />
-        <end pd="ping_pong" id="2" />
+        <end pd="uros_app" id="2" />
     </channel>
 </system>

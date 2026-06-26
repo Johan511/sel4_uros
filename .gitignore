@@ -2,3 +2,4 @@ third_party/
 build*/
 vm_images/
 .kilo/
+__pycache__
